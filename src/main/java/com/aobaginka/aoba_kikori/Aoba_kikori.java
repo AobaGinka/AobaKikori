@@ -73,8 +73,6 @@ public final class Aoba_kikori extends JavaPlugin implements Listener {
                 }
             }
         }
-
-        return;
     }
 
 
@@ -202,7 +200,6 @@ public final class Aoba_kikori extends JavaPlugin implements Listener {
                 breakBlock(block,tool);
             }
         }
-        return;
     }
 
 
@@ -229,8 +226,6 @@ public final class Aoba_kikori extends JavaPlugin implements Listener {
         }
 
         this.numberOfPlayer--;
-
-        return;
     }
 
 }

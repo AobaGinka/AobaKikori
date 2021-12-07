@@ -1,7 +1,7 @@
 package com.aobaginka.aoba_kikori;
 
 public class AobaKikoriPlayer {
-    private String  name;
+    private String name;
     private Boolean status_kikori;
     private Boolean status_ore;
 
@@ -20,7 +20,6 @@ public class AobaKikoriPlayer {
 
     public void setStatusOfKikori(Boolean status){
         this.status_kikori = status;
-        return;
     }
 
 
@@ -31,7 +30,6 @@ public class AobaKikoriPlayer {
 
     public void setStatusOfOre(Boolean status){
         this.status_ore = status;
-        return;
     }
 
     public String  getName(){
