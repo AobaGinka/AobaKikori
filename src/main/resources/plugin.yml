@@ -1,0 +1,9 @@
+name: Aoba_kikori
+version: '${version}'
+main: com.aobaginka.aoba_kikori.Aoba_kikori
+api-version: 1.17
+description: This plugin enable you to cut woods well.
+commands:
+  aobakikori:
+    description: this is a command about aobakikori.
+    usage: /<command> (kikori/ore) (on/off).
