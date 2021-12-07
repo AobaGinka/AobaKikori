@@ -5,6 +5,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -93,57 +94,61 @@ public final class Aoba_kikori extends JavaPlugin implements Listener {
     }
 
 
+    private void sendHelp(CommandSender sender){
+        sender.sendMessage("---<AobaKikori>---");
+        sender.sendMessage("/aobakikori kikori (on/off):  木こり機能をon/offする");
+        sender.sendMessage("/aobakikori ore (on/off): 鉱石の一括破壊機能をon/offする");
+    }
+
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args){
-        if(args.length == 0){
-            return false;
+        if(args.length == 0) {
+            sendHelp(sender);
+        }else{
+            if(sender instanceof Player){
+                if (args[0].equalsIgnoreCase("ore")) {
+                    if (args.length == 1) {
+                        sendHelp(sender);
+                    }else if(args[1].equalsIgnoreCase("on")) {
+                        for (int i = 0; i < this.numberOfPlayer; i++) {
+                            if (this.playerdate[i].getName() == sender.getName()) {
+                                this.playerdate[i].setStatusOfOre(true);
+                                sender.sendMessage("[AobaKikori]鉱石の一括破壊機能をONにしました");
+                            }
+                        }
+                    }else if (args[1].equalsIgnoreCase("off")) {
+                        for (int i = 0; i < this.numberOfPlayer; i++) {
+                            if (this.playerdate[i].getName() == sender.getName()) {
+                                this.playerdate[i].setStatusOfOre(false);
+                                sender.sendMessage("[AobaKikori]鉱石の一括破壊機能をOFFにしました");
+                            }
+                        }
+                    }
+                }else if (args[0].equalsIgnoreCase("kikori")) {
+                    if (args.length == 1) {
+                        sendHelp(sender);
+                    }else if (args[1].equalsIgnoreCase("on")) {
+                        for (int i = 0; i < this.numberOfPlayer; i++) {
+                            if (this.playerdate[i].getName() == sender.getName()) {
+                                this.playerdate[i].setStatusOfKikori(true);
+                                sender.sendMessage("[AobaKikori]木こり機能をONにしました");
+                            }
+                        }
+                    }else if (args[1].equalsIgnoreCase("off")) {
+                        for (int i = 0; i < this.numberOfPlayer; i++) {
+                            if (this.playerdate[i].getName() == sender.getName()) {
+                                this.playerdate[i].setStatusOfKikori(false);
+                                sender.sendMessage("[AobaKikori]木こり機能をOFFにしました");
+                            }
+                        }
+                    }
+                }
+                }else {
+                sender.sendMessage("[AobaKikori]プレイヤーで実行してください");
+            }
         }
-
-        if(args[0].equalsIgnoreCase("ore")){
-            if(args.length == 1){
-                return false;
-            }
-            if(args[1].equalsIgnoreCase("on")){
-                for(int i = 0; i < this.numberOfPlayer; i++){
-                    if(this.playerdate[i].getName() == sender.getName()){
-                        this.playerdate[i].setStatusOfOre(true);
-                        sender.sendMessage("[AobaKikori]鉱石の一括破壊機能をONにしました");
-                        return true;
-                    }
-                }
-            }else if(args[1].equalsIgnoreCase("off")){
-                for(int i = 0; i < this.numberOfPlayer; i++){
-                    if(this.playerdate[i].getName() == sender.getName()){
-                        this.playerdate[i].setStatusOfOre(false);
-                        sender.sendMessage("[AobaKikori]鉱石の一括破壊機能をOFFにしました");
-                        return true;
-                    }
-                }
-            }
-        }else if(args[0].equalsIgnoreCase("kikori")){
-            if(args.length == 1){
-                return false;
-            }
-            if(args[1].equalsIgnoreCase("on")){
-                for(int i = 0; i < this.numberOfPlayer; i++){
-                    if(this.playerdate[i].getName() == sender.getName()){
-                        this.playerdate[i].setStatusOfKikori(true);
-                        sender.sendMessage("[AobaKikori]木こり機能をONにしました");
-                        return true;
-                    }
-                }
-            }else if(args[1].equalsIgnoreCase("off")){
-                for(int i = 0; i < this.numberOfPlayer; i++){
-                    if(this.playerdate[i].getName() == sender.getName()){
-                        this.playerdate[i].setStatusOfKikori(false);
-                        sender.sendMessage("[AobaKikori]木こり機能をOFFにしました");
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        return false;
+        return true;
     }
 
 
